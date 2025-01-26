@@ -1,0 +1,70 @@
+# Compilação do Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+logs
+*.log
+*.tlog
+*.vspscc
+*.vspxproj
+
+# Build
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# Publicação local e pacotes
+.publish/
+*.publish.xml
+*.localhistory/
+
+# Configurações locais e ambientes
+appsettings.*.json
+!appsettings.json
+.env
+.env.*
+
+# Dependências
+packages/
+node_modules/
+
+# Configurações de IDE
+.idea/
+*.swp
+*.lock
+*.sublime-workspace
+*.sublime-project
+*.vscode/
+
+# Arquivos temporários
+*~
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+*.swp
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de log de depuração
+*.pidb
+*.log
+*.ilk
+
+# Dados de cache
+*.cache
+.cache/
+*.csproj.user
+
+# Arquivos do Rider (JetBrains)
+.idea/
+*.sln.iml
