@@ -15,23 +15,23 @@ Criar uma API mínima para gerenciar uma biblioteca, incluindo:
 ```
 BibliotecaApi/
 ├── Controllers/        # Define os endpoints da API, chamando os serviços.
-│   ├── ClienteController.cs
-│   ├── LivroController.cs
-│   └── EmprestimoController.cs
+│   ├── ClientsController.cs
+│   ├── BookController.cs
+│   └── LoansController.cs
 ├── Models/             # Define as entidades principais (Cliente, Livro, Empréstimo).
-│   ├── Cliente.cs
-│   ├── Livro.cs
-│   └── Emprestimo.cs
+│   ├── BooksModel.cs
+│   ├── ClientsModel.cs
+│   └── LoansModel.cs
 ├── Services/           # Contém a lógica de negócio (Cliente, Livro, Empréstimo).
-│   ├── ClienteService.cs
-│   ├── LivroService.cs
-│   └── EmprestimoService.cs
+│   ├── ClientsService.cs
+│   ├── BooksService.cs
+│   └── LoansService.cs
 ├── DTOs/               # Define os objetos de requisição e resposta (Requests e Responses).
-│   ├── ClienteDTO.cs
-│   ├── LivroDTO.cs
-│   └── EmprestimoDTO.cs
+│   ├── ClientsDTO.cs
+│   ├── BooksDTO.cs
+│   └── LoansDTO.cs
 ├── Data/               # Contexto do banco de dados (Entity Framework).
-│   ├── BibliotecaContext.cs
+│   ├── MySQLData.cs
 └── Program.cs          # Configuração inicial da aplicação.
 
 ```
@@ -52,17 +52,17 @@ BibliotecaApi/
 
 O banco possui três tabelas principais:
 
-1. **Clientes**:
+1. **Clients**:
    - `Id` (chave primária, gerado automaticamente).
    - `Nome`.
    - `Email` (único).
    - `Status` (ativo/inativo).
-2. **Livros**:
+2. **Books**:
    - `Id` (chave primária, gerado automaticamente).
    - `Título`.
    - `ISBN` (único).
    - `QuantidadeEstoque`.
-3. **Empréstimos**:
+3. **Loans**:
    - `Id` (chave primária, gerado automaticamente).
    - `ClienteId` (chave estrangeira para Clientes).
    - `LivroId` (chave estrangeira para Livros).
