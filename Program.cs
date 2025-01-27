@@ -2,6 +2,7 @@ using Books.Contollers;
 using Microsoft.EntityFrameworkCore;
 using MySQLData.Data;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,7 +14,8 @@ builder.Services.AddSwaggerGen();
 // Adicionar o contexto com a string de conexão do appsettings.json
 builder.Services.AddDbContext<LibraryContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
     if (string.IsNullOrEmpty(connectionString))
     {
         throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
