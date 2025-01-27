@@ -1,3 +1,4 @@
+using Books.Contollers;
 using Microsoft.EntityFrameworkCore;
 using MySQLData.Data;
 
@@ -27,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.BooksRouters();
 
 app.UseHttpsRedirection();
 
