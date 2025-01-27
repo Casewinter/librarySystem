@@ -136,3 +136,35 @@ O banco possui três tabelas principais:
 3. Melhorar o tratamento de erros com middlewares personalizados.
 
 ---
+## Roadmap
+
+- [ ]  Criar models
+- [ ]  Configurar o banco
+- [ ]  Criar Controllers
+    - Books
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+    - Clients
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+    - Loans
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+- [ ]  Criar DTOs
+    - [ ]  Books
+    - [ ]  Clients
+    - [ ]  Loans
+- [ ]  Criar Services
+    - [ ]  Books
+    - [ ]  Clients
+    - [ ]  Loans
+- [ ]  Implementar Services
+    - [ ]  Books
+    - [ ]  Clients
+    - [ ]  Loans
