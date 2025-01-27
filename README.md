@@ -138,8 +138,11 @@ O banco possui três tabelas principais:
 ---
 ## Roadmap
 
-- [ ]  Criar models
-- [ ]  Configurar o banco
+- [x]  Criar models
+    - [x]  Books
+    - [x]  Clients
+    - [x]  Loans
+- [x]  Configurar o banco
 - [ ]  Criar Controllers
     - Books
         - [ ]  GET
@@ -156,10 +159,10 @@ O banco possui três tabelas principais:
         - [ ]  POST
         - [ ]  DELETE
         - [ ]  PATCH
-- [ ]  Criar DTOs
-    - [ ]  Books
-    - [ ]  Clients
-    - [ ]  Loans
+- [x]  Criar DTOs
+    - [x]  Books
+    - [x]  Clients
+    - [x]  Loans
 - [ ]  Criar Services
     - [ ]  Books
     - [ ]  Clients
