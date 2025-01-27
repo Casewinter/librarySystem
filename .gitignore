@@ -68,3 +68,6 @@ Thumbs.db
 # Arquivos do Rider (JetBrains)
 .idea/
 *.sln.iml
+
+*.json
+
