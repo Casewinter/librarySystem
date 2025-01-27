@@ -7,6 +7,7 @@ public class ClientsModel
     public Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
+    public bool IsActive { get; private set; }
 
 
     public ClientsModel(string name, string email)
@@ -14,6 +15,7 @@ public class ClientsModel
         Id = Guid.NewGuid();
         Name = name;
         Email = email;
+        IsActive = true;
 
     }
 
@@ -23,5 +25,6 @@ public class ClientsModel
     {
         Name = string.Empty;
         Email = string.Empty;
+        IsActive = false;
     }
 }

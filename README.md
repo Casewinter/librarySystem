@@ -54,21 +54,21 @@ O banco possui três tabelas principais:
 
 1. **Clients**:
    - `Id` (chave primária, gerado automaticamente).
-   - `Nome`.
+   - `Name`.
    - `Email` (único).
-   - `Status` (ativo/inativo).
+   - `IsActive` (ativo/inativo).
 2. **Books**:
    - `Id` (chave primária, gerado automaticamente).
-   - `Título`.
+   - `Title`.
    - `ISBN` (único).
-   - `QuantidadeEstoque`.
+   - `QuantityStock`.
 3. **Loans**:
    - `Id` (chave primária, gerado automaticamente).
-   - `ClienteId` (chave estrangeira para Clientes).
-   - `LivroId` (chave estrangeira para Livros).
-   - `DataEmprestimo` (data do empréstimo).
-   - `DataMaxDevolucao` (data da devolução).
-   - `DataDevolucao` (data da devolução).
+   - `ClientId` (chave estrangeira para Clientes).
+   - `BookId` (chave estrangeira para Livros).
+   - `DateLoan` (data do empréstimo).
+   - `DateLoanDevolutionMax` (data da devolução).
+   - `DateLoanDevolution` (data da devolução).
 
 ---
 

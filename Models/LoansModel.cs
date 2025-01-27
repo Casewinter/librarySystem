@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-
+using Books.Models;
+using Clients.Models;
 namespace Loans.Models;
 
 public class LoansModel
@@ -23,4 +24,7 @@ public class LoansModel
     }
 
     protected LoansModel() { }
+
+    public BooksModel Book { get; set; } = null!;   // Relacionamento com BooksModel
+    public ClientsModel Client { get; set; } = null!;
 }
