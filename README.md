@@ -99,7 +99,7 @@ O banco possui três tabelas principais:
    - Criar o projeto [ASP.NET](http://asp.net/) Core Web API.
    - Configurar o **Entity Framework Core** com banco em MySQL.
 2. **Definição dos Modelos**:
-   - Criar as entidades (`Cliente`, `Livro`, `Emprestimo`).
+   - Criar as entidades (`Cient`, `Books`, `Loans`).
 3. **Configuração do Banco de Dados**:
    - Configurar o contexto do EF Core para gerenciar as tabelas e relacionamentos.
 4. **Separação em Camadas**:
@@ -110,7 +110,7 @@ O banco possui três tabelas principais:
    - CRUD básico para Clientes e Livros.
    - Fluxo de empréstimos e devoluções.
 6. **Testes e Validações**:
-   - Testar os endpoints usando **Postman** ou **curl**.
+   - Testar os endpoints usando **Swagger**.
    - Validar as regras de negócio.
 
 ---
@@ -124,7 +124,7 @@ O banco possui três tabelas principais:
    - Atualizar o estoque do livro (diminuir quantidade).
 4. Devolução:
    - Verificar se o empréstimo existe e ainda não foi devolvido.
-   - Atualizar a `DataDevolucao`.
+   - Atualizar a `DateLoanDevolution`.
    - Repor o estoque do livro (aumentar quantidade).
 
 ---
@@ -136,3 +136,38 @@ O banco possui três tabelas principais:
 3. Melhorar o tratamento de erros com middlewares personalizados.
 
 ---
+## Roadmap
+
+- [x]  Criar models
+    - [x]  Books
+    - [x]  Clients
+    - [x]  Loans
+- [x]  Configurar o banco
+- [ ]  Criar Controllers
+    - Books
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+    - Clients
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+    - Loans
+        - [ ]  GET
+        - [ ]  POST
+        - [ ]  DELETE
+        - [ ]  PATCH
+- [x]  Criar DTOs
+    - [x]  Books
+    - [x]  Clients
+    - [x]  Loans
+- [ ]  Criar Services
+    - [ ]  Books
+    - [ ]  Clients
+    - [ ]  Loans
+- [ ]  Implementar Services
+    - [ ]  Books
+    - [ ]  Clients
+    - [ ]  Loans
