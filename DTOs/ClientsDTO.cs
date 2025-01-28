@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Clients.DTOs;
 
 public record ClientsRequest(string Name, string Email);

@@ -1,5 +1,5 @@
 using Books.Contollers;
-
+using Clients.Contollers;
 using Microsoft.EntityFrameworkCore;
 using MySQLData.Data;
 
@@ -39,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.BooksRouters();
+app.ClientsRouters();
 
 app.UseHttpsRedirection();
 
