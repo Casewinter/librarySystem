@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Books.DTOs;
 
+
+using Books.Services;
+
 using MySQLData.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Books.Contollers;
+
 public static class Books
 {
 
@@ -12,14 +16,22 @@ public static class Books
     {
         var route = app.MapGroup("/book");
 
+        // route.MapGet("", async (LibraryContext context) =>
+        // {
+        //     var allBooks = await context.Books.ToListAsync();
+        //     if (allBooks == null || allBooks.Count == 0)
+        //     {
+        //         return Results.NotFound("Sem livros cadastrados");
+        //     }
+        //     return Results.Ok(allBooks);
+        // }).Produces<ActionResult<IEnumerable<BooksResponse>>>(StatusCodes.Status200OK)
+        // .Produces(StatusCodes.Status404NotFound);
+
+
         route.MapGet("", async (LibraryContext context) =>
         {
-            var allBooks = await context.Books.ToListAsync();
-            if (allBooks == null || allBooks.Count == 0)
-            {
-                return Results.NotFound("Sem livros cadastrados");
-            }
-            return Results.Ok(allBooks);
+            var book = await BooksService.FindAll(context);
+
         }).Produces<ActionResult<IEnumerable<BooksResponse>>>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
 

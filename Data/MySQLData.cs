@@ -19,6 +19,7 @@ public class LibraryContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        DotNetEnv.Env.Load();
         var connectionString = _configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
         {
@@ -51,9 +52,6 @@ public class LibraryContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
-
-
-
 
     public DbSet<ClientsModel> Clients { get; set; }
     public DbSet<BooksModel> Books { get; set; }

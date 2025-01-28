@@ -1,9 +1,11 @@
 using Books.Contollers;
+
 using Microsoft.EntityFrameworkCore;
 using MySQLData.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -14,7 +16,9 @@ builder.Services.AddSwaggerGen();
 // Adicionar o contexto com a string de conexão do appsettings.json
 builder.Services.AddDbContext<LibraryContext>(options =>
 {
-    var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
+
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
     if (string.IsNullOrEmpty(connectionString))
     {
@@ -22,7 +26,10 @@ builder.Services.AddDbContext<LibraryContext>(options =>
     }
     options.UseMySQL(connectionString);
 });
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
