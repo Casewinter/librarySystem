@@ -7,14 +7,18 @@ public class BooksModel
     public string ISBN { get; private set; }
     public int QuantityStock { get; private set; }
     public string Author { get; private set; }
+    public string Genre { get; private set; }
+    public string Synopsis { get; private set; }
 
-    public BooksModel(string title, string isbn, int quantityStock, string author)
+    public BooksModel(string title, string isbn, int quantityStock, string author, string genre, string synopsis)
     {
         Id = Guid.NewGuid();
         Title = title;
         ISBN = isbn;
         QuantityStock = quantityStock;
         Author = author;
+        Genre = genre;
+        Synopsis = synopsis;
     }
 
     protected BooksModel()
@@ -22,5 +26,7 @@ public class BooksModel
         Title = string.Empty;
         ISBN = string.Empty;
         Author = string.Empty;
+        Genre = string.Empty;
+        Synopsis = string.Empty;
     }
 }

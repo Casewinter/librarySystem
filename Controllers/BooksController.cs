@@ -5,7 +5,6 @@ using Error.DTO;
 using Books.Services;
 
 using MySQLData.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace Books.Contollers;
 
@@ -20,12 +19,12 @@ public static class Books
         {
             try
             {
-                var book = await BooksService.FindAll(context);
-                if (book == null || !book.Any())
+                var books = await BooksService.FindAll(context);
+                if (books.Item1 == null && books.Item2 != null)
                 {
-                    return Results.NotFound(new ErrorResponse("Nenhum livro encontrado."));
+                    return Results.NotFound(new ErrorResponse(books.Item2));
                 }
-                return Results.Ok(book);
+                return Results.Ok(books.Item1);
             }
             catch (Exception ex)
             {
@@ -35,28 +34,62 @@ public static class Books
         .Produces<string>(StatusCodes.Status404NotFound)
         .Produces<string>(StatusCodes.Status400BadRequest);
 
-
-
-        //Refatorar com services
-        route.MapGet("{id:guid}", async (string id, LibraryContext context) =>
+        route.MapGet("id/{id:guid}", async (string id, LibraryContext context) =>
         {
             try
             {
                 var book = await BooksService.Find(id, context);
-                if (book == null)
+                if (book.Item1 == null && book.Item2 != null)
                 {
-                    return Results.NotFound(new ErrorResponse("Nenhum livro encontrado."));
+                    return Results.NotFound(new ErrorResponse(book.Item2));
                 }
-                return Results.Ok(book);
+                return Results.Ok(book.Item1);
             }
             catch (Exception ex)
             {
                 return Results.BadRequest("Erro ao buscar o livro: " + ex.Message);
             }
-        }).Produces<List<BooksResponse>>(StatusCodes.Status200OK)
+        }).Produces<BooksResponse>(StatusCodes.Status200OK)
         .Produces<string>(StatusCodes.Status404NotFound)
         .Produces<string>(StatusCodes.Status400BadRequest);
 
+        route.MapGet("genre/{genre}", async (string genre, LibraryContext context) =>
+       {
+           try
+           {
+               var books = await BooksService.FindAllByGenre(genre, context);
+               if (books.Item1 == null && books.Item2 != null)
+               {
+                   return Results.NotFound(new ErrorResponse(books.Item2));
+               }
+               return Results.Ok(books.Item1);
+           }
+           catch (Exception ex)
+           {
+               return Results.BadRequest("Erro ao buscar o livro: " + ex.Message);
+           }
+       }).Produces<List<BooksResponse>>(StatusCodes.Status200OK)
+       .Produces<string>(StatusCodes.Status404NotFound)
+       .Produces<string>(StatusCodes.Status400BadRequest);
+
+        route.MapGet("author/{author}", async (string author, LibraryContext context) =>
+      {
+          try
+          {
+              var books = await BooksService.FindAllByAuthor(author, context);
+              if (books.Item1 == null && books.Item2 != null)
+              {
+                  return Results.NotFound(new ErrorResponse(books.Item2));
+              }
+              return Results.Ok(books.Item1);
+          }
+          catch (Exception ex)
+          {
+              return Results.BadRequest("Erro ao buscar o livro: " + ex.Message);
+          }
+      }).Produces<List<BooksResponse>>(StatusCodes.Status200OK)
+      .Produces<string>(StatusCodes.Status404NotFound)
+      .Produces<string>(StatusCodes.Status400BadRequest);
 
         route.MapPost("new-book", async (BooksRequest request, LibraryContext context) =>
         {

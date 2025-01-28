@@ -8,40 +8,127 @@ using MySQLData.Data;
 
 public static class BooksService
 {
-    public static async Task<List<BooksResponse>?> FindAll(LibraryContext context)
+    public static async Task<(List<BooksResponse>?, string?)> FindAll(LibraryContext context)
     {
-        var books = await context.Books.ToListAsync();
 
-        if (books == null)
+        try
         {
-            return null;
+            var books = await context.Books.ToListAsync();
+
+            if (books == null)
+            {
+                return (null, "Nenhum livro encontrado.");
+            }
+            var response = books.Select(book => new BooksResponse(
+               book.Id.ToString(),
+               book.Title,
+               book.ISBN,
+               book.QuantityStock,
+               book.Author,
+               book.Genre,
+               book.Synopsis
+           )).ToList();
+
+            return (response, null);
+        }
+        catch (Exception ex)
+        {
+            return (null, $"Erro ao conectar com o banco: {ex.Message}");
         }
 
-        return books.Select(book => new BooksResponse(
-            book.Id.ToString(),
-            book.Title,
-            book.ISBN,
-            book.QuantityStock,
-            book.Author
-        )).ToList();
     }
 
-    public static async Task<BooksResponse?> Find(string id, LibraryContext context)
+    public static async Task<(BooksResponse?, string?)> Find(string id, LibraryContext context)
     {
-        var book = await context.Books.FirstOrDefaultAsync(line => line.Id == Guid.Parse(id));
-
-        if (book == null)
+        try
         {
-            return null;
+            var book = await context.Books.FirstOrDefaultAsync(line => line.Id == Guid.Parse(id));
+
+            if (book == null)
+            {
+                return (null, "Nenhum livro encontrado.");
+            }
+
+            var response = new BooksResponse(
+                book.Id.ToString(),
+                book.Title,
+                book.ISBN,
+                book.QuantityStock,
+                book.Author,
+                book.Genre,
+                book.Synopsis
+            );
+
+            return (response, null);
         }
 
-        return new BooksResponse(
-            book.Id.ToString(),
-            book.Title,
-            book.ISBN,
-            book.QuantityStock,
-            book.Author
-        );
+        catch (Exception ex)
+        {
+            return (null, $"Erro ao conectar com o banco: {ex.Message}");
+        }
+
+    }
+
+    public static async Task<(List<BooksResponse>?, string?)> FindAllByGenre(string genre, LibraryContext context)
+    {
+
+        try
+        {
+
+            var books = await context.Books.Where(line => line.Genre == genre).ToListAsync();
+
+            if (books == null)
+            {
+                return (null, "Nenhum livro encontrado.");
+            }
+
+            var response = books.Select(book => new BooksResponse(
+                book.Id.ToString(),
+                book.Title,
+                book.ISBN,
+                book.QuantityStock,
+                book.Author,
+                book.Genre,
+                book.Synopsis)).ToList();
+
+
+            return (response, null);
+        }
+        catch (Exception ex)
+        {
+            return (null, $"Erro ao conectar com o banco: {ex.Message}");
+        }
+
+    }
+
+    public static async Task<(List<BooksResponse>?, string?)> FindAllByAuthor(string author, LibraryContext context)
+    {
+        try
+        {
+            var books = await context.Books.Where(line => line.Author == author).ToListAsync();
+
+            if (books == null)
+            {
+                return (null, "Nenhum livro encontrado.");
+            }
+
+            var response = books.Select(book => new BooksResponse(
+                 book.Id.ToString(),
+                 book.Title,
+                 book.ISBN,
+                 book.QuantityStock,
+                 book.Author,
+                 book.Genre,
+                 book.Synopsis)).ToList();
+
+
+            return (response, null);
+        }
+        catch (Exception ex)
+        {
+            return (null, $"Erro ao conectar com o banco: {ex.Message}");
+        }
+
     }
 
 
@@ -49,7 +136,7 @@ public static class BooksService
     {
         var bookModel = new BooksModel(
             request.Title,
-            request.ISBN, request.QuantityStock, request.Author
+            request.ISBN, request.QuantityStock, request.Author, request.Genre, request.Synopsis
         );
 
         try
@@ -61,7 +148,9 @@ public static class BooksService
                 bookModel.Title,
                 bookModel.ISBN,
                 bookModel.QuantityStock,
-                bookModel.Author
+                bookModel.Author,
+                bookModel.Genre,
+                bookModel.Synopsis
             );
         }
         catch (Exception ex)
